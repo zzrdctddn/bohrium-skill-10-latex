@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "reproducible-latex-build result.json",
+  "type": "object",
+  "required": [
+    "case_id",
+    "status",
+    "artifact",
+    "self_check"
+  ],
+  "properties": {
+    "case_id": { "type": "string" },
+    "status": { "enum": ["success", "partial", "blocked"] },
+    "note": { "type": "string" },
+    "artifact": {
+      "type": "object",
+      "required": ["main_file", "tex_sources", "editable"],
+      "properties": {
+        "main_file": { "type": "string" },
+        "tex_sources": { "type": "array", "items": { "type": "string" } },
+        "bib_file": { "type": "string" },
+        "build_manifest": { "type": "string" },
+        "editable": { "type": "boolean" },
+        "delivery_note": { "type": "string" }
+      }
+    },
+    "environment_probe": {
+      "type": "object",
+      "required": ["available"],
+      "properties": {
+        "tex_engine": { "type": "string" },
+        "distribution": { "type": "string" },
+        "version": { "type": "string" },
+        "available": { "type": "boolean" },
+        "basis": { "type": "string" }
+      }
+    },
+    "error_diagnosis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["error_id", "category", "root_cause"],
+        "properties": {
+          "error_id": { "type": "string" },
+          "raw_message": { "type": "string" },
+          "category": { "enum": ["missing_package", "file_not_found", "syntax", "math", "table", "reference", "font", "cascade"] },
+          "file": { "type": "string" },
+          "line": { "type": "integer" },
+          "root_cause": { "type": "string" },
+          "fix": { "type": "string" },
+          "cascade": { "type": "boolean" },
+          "status": { "enum": ["root_caused", "static_only"] }
+        }
+      }
+    },
+    "edit_verification": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["edit_id", "target", "intent"],
+        "properties": {
+          "edit_id": { "type": "string" },
+          "target": { "type": "string" },
+          "intent": { "type": "string" },
+          "before": { "type": "string" },
+          "after": { "type": "string" },
+          "template_compliant": { "type": "boolean" },
+          "source_aligned": { "type": "boolean" }
+        }
+      }
+    },
+    "compile_passes": { "type": "array" },
+    "convergence": {
+      "type": "object",
+      "required": ["converged"],
+      "properties": {
+        "converged": { "enum": ["true", "false", "unknown"] },
+        "criterion": { "type": "string" },
+        "undefined_refs": { "type": "array", "items": { "type": "string" } },
+        "undefined_citations": { "type": "array", "items": { "type": "string" } },
+        "basis": { "type": "string" }
+      }
+    },
+    "build_manifest": { "type": "object" },
+    "fact_source_map": { "type": "array" },
+    "uncertainties": { "type": "array", "items": { "type": "string" } },
+    "human_review_items": { "type": "array", "items": { "type": "string" } },
+    "change_log": { "type": "array" },
+    "self_check": {
+      "type": "object",
+      "required": ["compiles_verified", "errors_root_caused", "edits_intent_compliant", "editable_source_delivered", "build_record_complete", "no_fabrication"],
+      "properties": {
+        "compiles_verified": { "type": "boolean" },
+        "errors_root_caused": { "type": "boolean" },
+        "edits_intent_compliant": { "type": "boolean" },
+        "editable_source_delivered": { "type": "boolean" },
+        "build_record_complete": { "type": "boolean" },
+        "no_fabrication": { "type": "boolean" }
+      }
+    }
+  }
+}
