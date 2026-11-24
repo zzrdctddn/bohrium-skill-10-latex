@@ -1,0 +1,90 @@
+{
+  "case_id": "DEMO-NOT-A-REAL-CASE",
+  "status": "partial",
+  "note": "示意输出，非真实案例结果；未实际编译，所有日志/版本号均为占位或待确认，不代表任何真实构建。",
+  "artifact": {
+    "main_file": "main.tex",
+    "tex_sources": ["main.tex", "sections/intro.tex", "sections/method.tex"],
+    "bib_file": "refs.bib",
+    "build_manifest": "BUILD_MANIFEST.md",
+    "editable": true,
+    "delivery_note": "交付可编辑 .tex 源码工程与构建清单，非 PDF/截图"
+  },
+  "environment_probe": {
+    "tex_engine": "none",
+    "distribution": "unknown",
+    "version": "未知",
+    "available": false,
+    "basis": "示意：当前运行环境未检测到 TeX 引擎，按静态诊断处理"
+  },
+  "error_diagnosis": [
+    {
+      "error_id": "E1",
+      "raw_message": "静态检查：第 12 行使用了 \\bm 命令但未加载 bm 宏包",
+      "category": "missing_package",
+      "file": "main.tex",
+      "line": 12,
+      "root_cause": "导言区未加载 bm 宏包",
+      "fix": "在导言区加入 \\usepackage{bm}（示意）",
+      "cascade": false,
+      "status": "static_only"
+    }
+  ],
+  "edit_verification": [
+    {
+      "edit_id": "X1",
+      "target": "表 1",
+      "intent": "修复溢出且不靠缩放掩盖",
+      "before": "\\scalebox{0.8}{...}",
+      "after": "调整列格式为 p{宽} 并保持三线表（示意）",
+      "template_compliant": true,
+      "source_aligned": true
+    }
+  ],
+  "compile_passes": [
+    {
+      "pass_no": 1,
+      "command": "pdflatex main.tex",
+      "exit_status": "static_unverified",
+      "warnings": [],
+      "log_excerpt": "未实际编译，无日志",
+      "source": "static"
+    }
+  ],
+  "convergence": {
+    "converged": "unknown",
+    "criterion": "无 undefined references/citations 且 .aux 稳定",
+    "undefined_refs": [],
+    "undefined_citations": [],
+    "basis": "未实际编译，需在有 TeX 环境处复核"
+  },
+  "build_manifest": {
+    "tex_distribution": "待确认",
+    "template_version": "待确认",
+    "packages": [{"name": "booktabs", "version": "待确认"}],
+    "fonts": ["待确认"],
+    "commands": ["pdflatex main.tex", "bibtex main", "pdflatex main", "pdflatex main"],
+    "pass_count": "4（latex→bibtex→latex×2，模板另有规定从其规定）",
+    "source": "模板说明与 RLBD 收敛程序"
+  },
+  "fact_source_map": [
+    {"item": "模板必填项 \\title", "value": "待确认", "source_location": "conf-template.cls"}
+  ],
+  "uncertainties": ["未实际编译，编译通过与否未验证", "宏包/字体/发行版版本待确认"],
+  "human_review_items": [
+    "请确认模板必填项：标题、作者、基金、日期（当前标待确认）",
+    "请在有 TeX 环境处按清单命令与轮次编译，复核收敛结论"
+  ],
+  "change_log": [
+    {"step": 4, "action": "表 1 改用列宽调整替代 scalebox", "reason": "避免缩放掩盖溢出"},
+    {"step": 3, "action": "编译相关结论标 static_only/unknown", "reason": "环境无 TeX 引擎，不编造编译结果"}
+  ],
+  "self_check": {
+    "compiles_verified": false,
+    "errors_root_caused": true,
+    "edits_intent_compliant": true,
+    "editable_source_delivered": true,
+    "build_record_complete": true,
+    "no_fabrication": true
+  }
+}
