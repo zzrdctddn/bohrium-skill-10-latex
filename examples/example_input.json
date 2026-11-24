@@ -1,0 +1,17 @@
+{
+  "case_id": "DEMO-NOT-A-REAL-CASE",
+  "note": "以下为演示接口的虚构示例，非官方测试案例，不构成正式答案。",
+  "task": "修复 main.tex 的编译报错，迁入会议模板并补齐必填项，给出可复现构建清单",
+  "params": {
+    "template": "conf-template.cls",
+    "engine": "pdflatex",
+    "forbid_fabricated_build_log": true
+  },
+  "materials": {
+    "main": "main.tex",
+    "sections": ["sections/"],
+    "bib": "refs.bib",
+    "template": "conf-template.cls",
+    "constraints": ["不提交预制答案", "无编译环境时静态诊断并如实标注"]
+  }
+}
